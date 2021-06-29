@@ -1,27 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
+import fire from "./firebase";
 import Login from "./component/Login";
 import Dashboard from "./Screens/Dashboard";
+import React, { useState, useEffect } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <Router>
-				<div className='App'>
-					<Switch>
-						<Route exact path='/'>
-							<Login />
-						</Route>
-						<Route path='/dashboard'>
-							<Dashboard />
-						</Route>
-					</Switch>
-				</div>
-			</Router>
-      
-    </div>
-  );
+	const [user, setUser] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const handleLogout = () => {
+		fire.auth().signOut();
+	};
+
+	const clearInputs = () => {
+		setEmail("");
+		setPassword("");
+	};
+
+	const authListener = () => {
+		fire.auth().onAuthStateChanged((user) => {
+			if (user) {
+				clearInputs();
+				setUser(user);
+			} else {
+				setUser("");
+			}
+		});
+	};
+
+	useEffect(() => {
+		authListener();
+	}, []);
+
+	return (
+		<div className='App'>
+			{user ? (
+				<Dashboard handleLogout={handleLogout} />
+			) : (
+				<Login
+					email={email}
+					setEmail={setEmail}
+					password={password}
+					setPassword={setPassword}
+				/>
+			)}
+		</div>
+	);
 }
 
 export default App;
