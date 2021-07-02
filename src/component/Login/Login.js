@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import fire from "../../firebase";
 
 const Login = ({ email, password, setEmail, setPassword }) => {
@@ -26,6 +26,9 @@ const Login = ({ email, password, setEmail, setPassword }) => {
 					case "auth/wrong-password":
 						setPasswordError(err.message);
 						break;
+
+					default:
+
 				}
 			});
 	};
@@ -43,6 +46,7 @@ const Login = ({ email, password, setEmail, setPassword }) => {
 					case "auth/wrong-password":
 						setPasswordError(err.message);
 						break;
+					default:
 				}
 			});
 	};

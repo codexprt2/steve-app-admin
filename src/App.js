@@ -10,9 +10,7 @@ function App() {
 	const [email, setEmail] = useState("zalaanjali11@gmail.com");
 	const [password, setPassword] = useState("134679852");
 
-	const handleLogout = () => {
-		fire.auth().signOut();
-	};
+	
 var Loader = require('react-loader');
 	const clearInputs = () => {
 		setEmail("");
@@ -34,10 +32,9 @@ var Loader = require('react-loader');
 	};
 
 	useEffect(() => {
-		
 			authListener();
 			setLoading(false)
-			
+			// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 
