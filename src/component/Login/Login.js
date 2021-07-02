@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import fire from "../firebase";
+import fire from "../../firebase";
 
 const Login = ({ email, password, setEmail, setPassword }) => {
 	const [emailError, setEmailError] = useState("");
@@ -50,7 +50,7 @@ const Login = ({ email, password, setEmail, setPassword }) => {
 	return (
 		<section className='login'>
 			<div className='loginContainer'>
-				<label>UserName</label>
+				<label>Email</label>
 				<input
 					type='text'
 					outoFocus
@@ -59,7 +59,7 @@ const Login = ({ email, password, setEmail, setPassword }) => {
 					onChange={(e) => setEmail(e.target.value)}
 				/>
 				<p className='errorMsg'>{emailError}</p>
-				<label>PassWord</label>
+				<label>Password</label>
 				<input
 					type='password'
 					required

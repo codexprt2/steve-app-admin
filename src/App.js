@@ -1,50 +1,59 @@
 import "./App.css";
 import fire from "./firebase";
-import Login from "./component/Login";
-import Dashboard from "./Screens/Dashboard";
+import Login from "./component/Login/Login";
+import Hoc from "./Hoc";
 import React, { useState, useEffect } from "react";
 
 function App() {
-	const [user, setUser] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const[loading,setLoading] = useState(false)
+	const [user, setUser] = useState(false);
+	const [email, setEmail] = useState("zalaanjali11@gmail.com");
+	const [password, setPassword] = useState("134679852");
 
 	const handleLogout = () => {
 		fire.auth().signOut();
 	};
-
+var Loader = require('react-loader');
 	const clearInputs = () => {
 		setEmail("");
 		setPassword("");
 	};
 
 	const authListener = () => {
-		fire.auth().onAuthStateChanged((user) => {
-			if (user) {
+		fire.auth().onAuthStateChanged((userData) => {
+			console.log("usedata!!!!",userData)
+			if (userData) {
 				clearInputs();
-				setUser(user);
+				setLoading(true)
+				setUser(userData);
+				setLoading(false)
 			} else {
-				setUser("");
+				setUser(null);
 			}
 		});
 	};
 
 	useEffect(() => {
-		authListener();
+		
+			authListener();
+			setLoading(false)
+			
 	}, []);
+
 
 	return (
 		<div className='App'>
-			{user ? (
-				<Dashboard handleLogout={handleLogout} />
-			) : (
+		
+		
+			{ user === false ? <Loader loaded={loading}/> 
+			: user === null ? (
 				<Login
 					email={email}
 					setEmail={setEmail}
 					password={password}
 					setPassword={setPassword}
 				/>
-			)}
+			) : <Hoc />}
 		</div>
 	);
 }
