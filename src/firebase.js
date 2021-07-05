@@ -1,6 +1,9 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/analytics";
 
-var firebaseConfig = {
+const firebaseConfig = {
 	apiKey: "AIzaSyCxwIMjKT8g9kYa7I4knKdvb_oY8n-Iz5U",
 	authDomain: "steve-admin-fbec6.firebaseapp.com",
 	projectId: "steve-admin-fbec6",

@@ -20,14 +20,16 @@ export const getProjectSetting = () => {
 };
 
 export const addProjectSetting = (projectsetting) => {
-	console.log("category1", projectsetting);
 	return new Promise((resolve, reject) => {
 		//  Get add category in firestore
-		let insertData = { name: projectsetting };
+		let insertData = projectsetting;
+		console.log("insertData", insertData);
+		console.log(insertData);
 		db()
 			.collection("projectsetting")
 			.add(insertData)
 			.then(async (docRef) => {
+				console.log(docRef.id);
 				insertData = { id: docRef.id, ...insertData };
 				resolve(insertData);
 			})

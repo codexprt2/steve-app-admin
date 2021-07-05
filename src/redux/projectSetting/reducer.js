@@ -21,20 +21,29 @@ const projectSettingReducer = (state = defaultState, action) => {
 				},
 			};
 		}
-		case types.SET_PROJECTSETTING: {
+		// case types.SET_PROJECTSETTING: {
+		// 	console.log("action.payload", action.payload);
+		// 	return {
+		// 		projectSetting: {
+		// 			...state.projectSetting,
+		// 			projectSetting: { ...action.payload },
+		// 		},
+		// 	};
+		// }
+		case types.ADD_PROJECTSETTING: {
 			console.log("action.payload", action.payload);
 			return {
 				projectSetting: {
 					...state.projectSetting,
-					projectSetting: [...action.payload],
-				},
-			};
-		}
-		case types.ADD_PROJECTSETTING: {
-			return {
-				projectSetting: {
-					...state.projectSetting,
-					// projectSetting: [...state.projectSetting.categories, action.payload],
+
+					projectSetting: {
+						firstName: action.payload.firstName,
+						lastName: action.payload.lastName,
+						profileImage: action.payload.profileImage,
+						profileLabel: action.payload.profileLabel,
+						loading: action.payload.loading,
+						headingSkills: [...action.payload.headingSkills],
+					},
 				},
 			};
 		}

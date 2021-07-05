@@ -18,7 +18,25 @@ export const setProjectSetting = () => (dispatch) => {
 	dispatch(setProjectSettingLoader(true));
 	projectSettingFirestore.addProjectSetting().then((projectSettingVal) => {
 		console.log("categoryval", projectSettingVal);
-		dispatch(setCategoryData(projectSettingVal));
-		dispatch(setCategoryLoader(false));
+		dispatch(setProjectSettingData(projectSettingVal));
+		dispatch(setProjectSettingLoader(false));
 	});
+};
+
+const addProjectSettingData = (val) => {
+	return {
+		type: types.ADD_PROJECTSETTING,
+		payload: val,
+	};
+};
+export const addProjectSettingValue = (projectsetting) => (dispatch) => {
+	dispatch(setProjectSettingLoader(true));
+	projectSettingFirestore
+		.addProjectSetting(projectsetting)
+		.then((projectsettingVal) => {
+			console.log("projectsettingVal", projectsettingVal);
+
+			dispatch(addProjectSettingData(projectsettingVal));
+			dispatch(setProjectSettingLoader(false));
+		});
 };

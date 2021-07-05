@@ -1,4 +1,4 @@
-import firebase from "../config/firebaseConfig";
+import firebase from "../firebase";
 
 console.log("firebase :: ", firebase);
 
