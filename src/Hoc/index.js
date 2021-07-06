@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Dashboard from "../Screens/Dashboard";
-import { Provider } from "react-redux";
-import { store, persistor } from "../redux/store";
-import { PersistGate } from "redux-persist/integration/react";
 
-const index = () => {
-	return (
-		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistor}>
-				<Dashboard />
-			</PersistGate>
-		</Provider>
-	);
+import { connect } from "react-redux";
+import { setProjectSetting } from "../redux/projectSetting/action";
+
+const Hoc = ({ setProjectSettingData }) => {
+	useEffect(() => {
+		setProjectSettingData();
+	}, []);
+	return <Dashboard />;
 };
 
-export default index;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		setProjectSettingData: () => dispatch(setProjectSetting()),
+	};
+};
+export default connect(null, mapDispatchToProps)(Hoc);

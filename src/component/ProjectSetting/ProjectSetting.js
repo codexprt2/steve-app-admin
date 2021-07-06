@@ -1,27 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import GridInput from "../GridInput";
-import { connect } from "react-redux";
-import { addProjectSettingValue } from "../../redux/projectSetting/action";
 
-const ProjectSetting = ({ addProjectSettingData }) => {
-	const [isOpen, setIsOpen] = useState(false);
-	const [isEdit, setIsEdit] = useState(false);
+import { connect } from "react-redux";
+import { updateProjectSettingValue } from "../../redux/projectSetting/action";
+
+const ProjectSetting = ({
+	addProjectSettingData,
+	projectSetting,
+	updateProjectSettingData,
+}) => {
 	const [skills, setSkills] = useState([]);
 	const [item, setItem] = useState({
 		firstName: "",
 		lastName: "",
 		profileLabel: "",
 		profileImage: "",
+		id: "",
 	});
+
 	const handleInputChange = (e) => {
 		setItem({ ...item, [e.target.name]: e.target.value });
-		console.log(item);
 	};
 	const handleSkillsChange = (e, index) => {
 		const skillsData = [...skills];
@@ -33,17 +36,21 @@ const ProjectSetting = ({ addProjectSettingData }) => {
 		setSkills([...skills, ""]);
 	};
 
-	const onEditHandle = () => {
-		setIsOpen(false);
-		setIsEdit(false);
-	};
-	const handleEdit = () => {
-		setIsEdit(true);
-	};
 	const handleSubmit = () => {
 		item.headingSkills = skills;
-		addProjectSettingData(item);
+		updateProjectSettingData(item);
 	};
+
+	useEffect(() => {
+		setItem({
+			firstName: projectSetting.firstName,
+			lastName: projectSetting.lastName,
+			profileLabel: projectSetting.profileLabel,
+			profileImage: projectSetting.profileImage,
+			id: projectSetting.id,
+		});
+		setSkills(projectSetting.headingSkills);
+	}, [projectSetting]);
 
 	return (
 		<React.Fragment>
@@ -56,7 +63,6 @@ const ProjectSetting = ({ addProjectSettingData }) => {
 						required
 						id='firstName'
 						name='firstName'
-						label='First name'
 						fullWidth
 						autoComplete='given-name'
 						onChange={handleInputChange}
@@ -68,7 +74,6 @@ const ProjectSetting = ({ addProjectSettingData }) => {
 						required
 						id='lastName'
 						name='lastName'
-						label='Last name'
 						fullWidth
 						autoComplete='family-name'
 						onChange={handleInputChange}
@@ -80,7 +85,6 @@ const ProjectSetting = ({ addProjectSettingData }) => {
 						required
 						id='profileLabel'
 						name='profileLabel'
-						label='Profile Label'
 						fullWidth
 						autoComplete='family-name'
 						onChange={handleInputChange}
@@ -92,18 +96,17 @@ const ProjectSetting = ({ addProjectSettingData }) => {
 						required
 						id='profileImage'
 						name='profileImage'
-						label='Profile Image'
 						fullWidth
 						autoComplete='family-name'
 						onChange={handleInputChange}
 						value={item.profileImage}
 					/>
 				</Grid>
+
 				{skills.map((obj, i) => (
 					<Grid item xs={6} key={`${i}`}>
 						<TextField
 							required
-							label='Heading Skills '
 							fullWidth
 							autoComplete='shipping address-line1'
 							onChange={(e) => handleSkillsChange(e, i)}
@@ -128,10 +131,17 @@ const ProjectSetting = ({ addProjectSettingData }) => {
 		</React.Fragment>
 	);
 };
+const mapStateToProps = (store) => {
+	console.log("projectSettingReducer", store.projectSettingReducer[0]);
+	return {
+		projectSetting: store.projectSettingReducer[0],
+	};
+};
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		addProjectSettingData: (val) => dispatch(addProjectSettingValue(val)),
+		// addProjectSettingData: (val) => dispatch(addProjectSettingValue(val)),
+		updateProjectSettingData: (val) => dispatch(updateProjectSettingValue(val)),
 	};
 };
-export default connect(null, mapDispatchToProps)(ProjectSetting);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectSetting);

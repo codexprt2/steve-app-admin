@@ -1,52 +1,41 @@
 import * as types from "./types";
 
 const defaultState = {
-	projectSetting: {
-		firstName: "",
-		lastName: "",
-		profileImage: "",
-		profileLabel: "",
-		headingSkills: [],
-		socialMediaLink: [],
-		loading: false,
-	},
+	firstName: "",
+	lastName: "",
+	profileImage: "",
+	profileLabel: "",
+	headingSkills: [],
+	socialMediaLink: [],
 };
 const projectSettingReducer = (state = defaultState, action) => {
 	switch (action.type) {
 		case types.SET_PROJECTSETTING_LOADER: {
 			return {
-				projectSetting: {
-					...state.projectSetting,
-					loading: action.payload,
-				},
+				...state,
+				loading: action.payload,
 			};
 		}
-		// case types.SET_PROJECTSETTING: {
-		// 	console.log("action.payload", action.payload);
+		case types.SET_PROJECTSETTING: {
+			console.log("action.payload!!!!", action.payload);
+			return {
+				...action.payload,
+			};
+		}
+		// case types.ADD_PROJECTSETTING: {
 		// 	return {
-		// 		projectSetting: {
-		// 			...state.projectSetting,
-		// 			projectSetting: { ...action.payload },
-		// 		},
+		// 		...state,
+		// 		...action.payload,
 		// 	};
 		// }
-		case types.ADD_PROJECTSETTING: {
-			console.log("action.payload", action.payload);
-			return {
-				projectSetting: {
-					...state.projectSetting,
+		// case types.UPDATE_PROJECTSETTING: {
+		// 	console.log("action.payload!!!", action.payload);
 
-					projectSetting: {
-						firstName: action.payload.firstName,
-						lastName: action.payload.lastName,
-						profileImage: action.payload.profileImage,
-						profileLabel: action.payload.profileLabel,
-						loading: action.payload.loading,
-						headingSkills: [...action.payload.headingSkills],
-					},
-				},
-			};
-		}
+		// 	return {
+		// 		...state,
+		// 		...action.payload,
+		// 	};
+		// }
 		default: {
 			return state;
 		}

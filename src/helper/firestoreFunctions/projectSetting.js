@@ -6,7 +6,9 @@ export const getProjectSetting = () => {
 		db()
 			.collection("projectsetting")
 			.onSnapshot((snapshot) => {
+				console.log("snapshot", snapshot);
 				let projectsettingData = [];
+				// eslint-disable-next-line array-callback-return
 				snapshot.docs.map((val) => {
 					projectsettingData = [
 						...projectsettingData,
@@ -40,26 +42,36 @@ export const addProjectSetting = (projectsetting) => {
 	});
 };
 
-// export const editCategory = (data, category) => {
-// 	console.log("category123", category, data);
-// 	return new Promise((resolve, reject) => {
-// 		//  Get edit category in firestore
-// 		let updateData = { name: category };
-// 		db()
-// 			.collection("category")
-// 			.doc(data.id)
-// 			.update(updateData)
-// 			.then(async (docRef) => {
-// 				updateData = { id: data.id, ...updateData };
-// 				resolve(updateData);
-// 			})
+export const editProjectSetting = (projectSetting) => {
+	console.log("categoryprojectSetting123", projectSetting);
+	return new Promise(async (resolve, reject) => {
+		//  Get edit category in firestore
+		let updateData = {
+			id: projectSetting.id,
+			firstName: projectSetting.firstName,
+			lastName: projectSetting.lastName,
+			profileImage: projectSetting.profileImage,
+			profileLabel: projectSetting.profileLabel,
+			headingSkills: [...projectSetting.headingSkills],
+		};
+		// let updateData = projectSetting;
+		console.log("updateData", updateData);
 
-// 			.catch((error) => {
-// 				console.error("Error adding document: ", error);
-// 				reject(error);
-// 			});
-// 	});
-// };
+		const dbRef = db().collection("projectsetting").doc(projectSetting.id);
+
+		dbRef
+			.update(updateData)
+			.then(async (docRef) => {
+				console.log("docRef", docRef);
+				updateData = { ...projectSetting, ...updateData };
+				resolve(updateData);
+			})
+			.catch((error) => {
+				console.error("Error adding document: ", error);
+				reject(error);
+			});
+	});
+};
 
 // export const deleteCategory = (val) => {
 // 	return new Promise((resolve, reject) => {

@@ -8,7 +8,6 @@ const setProjectSettingLoader = (val) => {
 	};
 };
 const setProjectSettingData = (val) => {
-	console.log("val", val);
 	return {
 		type: types.SET_PROJECTSETTING,
 		payload: val,
@@ -16,27 +15,34 @@ const setProjectSettingData = (val) => {
 };
 export const setProjectSetting = () => (dispatch) => {
 	dispatch(setProjectSettingLoader(true));
-	projectSettingFirestore.addProjectSetting().then((projectSettingVal) => {
-		console.log("categoryval", projectSettingVal);
+	projectSettingFirestore.getProjectSetting().then((projectSettingVal) => {
 		dispatch(setProjectSettingData(projectSettingVal));
 		dispatch(setProjectSettingLoader(false));
 	});
 };
 
-const addProjectSettingData = (val) => {
-	return {
-		type: types.ADD_PROJECTSETTING,
-		payload: val,
-	};
-};
-export const addProjectSettingValue = (projectsetting) => (dispatch) => {
+// const addProjectSettingData = (val) => {
+// 	return {
+// 		type: types.ADD_PROJECTSETTING,
+// 		payload: val,
+// 	};
+// };
+// export const addProjectSettingValue = (projectsetting) => (dispatch) => {
+// 	dispatch(setProjectSettingLoader(true));
+// 	projectSettingFirestore
+// 		.addProjectSetting(projectsetting)
+// 		.then((projectsettingVal) => {
+// 			dispatch(setProjectSetting());
+// 			dispatch(setProjectSettingLoader(false));
+// 		});
+// };
+
+export const updateProjectSettingValue = (projectSetting) => (dispatch) => {
 	dispatch(setProjectSettingLoader(true));
 	projectSettingFirestore
-		.addProjectSetting(projectsetting)
-		.then((projectsettingVal) => {
-			console.log("projectsettingVal", projectsettingVal);
-
-			dispatch(addProjectSettingData(projectsettingVal));
+		.editProjectSetting(projectSetting)
+		.then((projectSettingVal) => {
+			dispatch(setProjectSettingData(projectSettingVal));
 			dispatch(setProjectSettingLoader(false));
 		});
 };
