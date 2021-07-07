@@ -18,6 +18,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import AppItems from "../component/Items/AppItems";
 import ProjectSetting from "../component/ProjectSetting/ProjectSetting";
+import AboutMe from "../component/AboutMe/AboutMe";
 import Button from "@material-ui/core/Button";
 import { fire } from "../firebase";
 
@@ -112,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
 	fixedHeight: {
 		height: "auto",
 		minHeight: "70vh",
+		padding: "5%",
 	},
 }));
 
@@ -141,7 +143,7 @@ export default function Dashboard() {
 				return <ProjectSetting />;
 			}
 			case "about": {
-				return null;
+				return <AboutMe />;
 			}
 			default: {
 				return <ProjectSetting />;

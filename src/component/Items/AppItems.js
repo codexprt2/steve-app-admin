@@ -9,7 +9,6 @@ import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
 
-
 const AppItems = ({ onHandleSearch }) => {
 	return (
 		<div>
@@ -23,13 +22,13 @@ const AppItems = ({ onHandleSearch }) => {
 				<ListItemIcon>
 					<ShoppingCartIcon />
 				</ListItemIcon>
-				<ListItemText primary='About' />
+				<ListItemText primary='About Me' />
 			</ListItem>
 			<ListItem button onClick={() => onHandleSearch("portfolio")}>
 				<ListItemIcon>
 					<PeopleIcon />
 				</ListItemIcon>
-				<ListItemText primary='PORTFOLIO' />
+				<ListItemText primary='Portfolio' />
 			</ListItem>
 			<ListItem button onClick={() => onHandleSearch("blog")}>
 				<ListItemIcon>
