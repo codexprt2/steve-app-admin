@@ -7,14 +7,14 @@ export const getProjectSetting = () => {
 			.collection("projectsetting")
 			.onSnapshot((snapshot) => {
 				console.log("snapshot", snapshot);
-				let projectsettingData = [];
+				let projectsettingData = {};
 				// eslint-disable-next-line array-callback-return
-				snapshot.docs.map((val) => {
-					projectsettingData = [
-						...projectsettingData,
-						{ id: val.id, ...val.data() },
-					];
-				});
+				const val = snapshot.docs[0];
+				projectsettingData = {
+					id: val.id,
+					...val.data(),
+				};
+
 				console.log("projectsettingData : ", projectsettingData);
 				resolve(projectsettingData);
 			});
@@ -53,6 +53,7 @@ export const editProjectSetting = (projectSetting) => {
 			profileImage: projectSetting.profileImage,
 			profileLabel: projectSetting.profileLabel,
 			headingSkills: [...projectSetting.headingSkills],
+			socialMediaLinks: [...projectSetting.socialMediaLinks],
 		};
 		// let updateData = projectSetting;
 		console.log("updateData", updateData);

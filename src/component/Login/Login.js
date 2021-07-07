@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import fire from "../../firebase";
+import { fire } from "../../firebase";
 
 const Login = ({ email, password, setEmail, setPassword }) => {
 	const [emailError, setEmailError] = useState("");
@@ -28,7 +28,6 @@ const Login = ({ email, password, setEmail, setPassword }) => {
 						break;
 
 					default:
-
 				}
 			});
 	};

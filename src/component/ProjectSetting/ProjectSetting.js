@@ -5,40 +5,73 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import { storageRef } from "../../firebase";
 
 import { connect } from "react-redux";
 import { updateProjectSettingValue } from "../../redux/projectSetting/action";
 
-const ProjectSetting = ({
-	addProjectSettingData,
-	projectSetting,
-	updateProjectSettingData,
-}) => {
+const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 	const [skills, setSkills] = useState([]);
+	const [socialLinks, setSocialLinks] = useState([]);
+
+	const [file, setFile] = useState(null);
+	const [url, setURL] = useState("");
 	const [item, setItem] = useState({
 		firstName: "",
 		lastName: "",
 		profileLabel: "",
-		profileImage: "",
 		id: "",
 	});
 
 	const handleInputChange = (e) => {
 		setItem({ ...item, [e.target.name]: e.target.value });
 	};
+
+	const handleImageChange = (e) => {
+		if (e.target.files[0]) {
+			setFile(e.target.files[0]);
+		}
+	};
+	const handleUpload = (e) => {
+		e.preventDefault();
+
+		const ref = storageRef.ref(`/images/${file.name}`);
+		const uploadTask = ref.put(file);
+
+		uploadTask.on("state_changed", console.log, console.error, () => {
+			ref.getDownloadURL().then((url) => {
+				setFile(null);
+				setURL(url);
+			});
+		});
+	};
+
 	const handleSkillsChange = (e, index) => {
 		const skillsData = [...skills];
 		skillsData[index] = e.target.value;
 		setSkills(skillsData);
 	};
+	const handleLinksChange = (e, index) => {
+		const linksData = [...socialLinks];
+		linksData[index][e.target.name] = e.target.value;
+
+		setSocialLinks(linksData);
+		console.log("linksData", linksData);
+	};
 
 	const handleAdd = () => {
 		setSkills([...skills, ""]);
 	};
-
+	const handleAddLink = () => {
+		setSocialLinks([...socialLinks, { socialMedia: "", icon: "", link: "" }]);
+	};
 	const handleSubmit = () => {
 		item.headingSkills = skills;
+		item.socialMediaLinks = socialLinks;
+		item.profileImage = url;
+
 		updateProjectSettingData(item);
+		console.log("item", item);
 	};
 
 	useEffect(() => {
@@ -46,10 +79,11 @@ const ProjectSetting = ({
 			firstName: projectSetting.firstName,
 			lastName: projectSetting.lastName,
 			profileLabel: projectSetting.profileLabel,
-			profileImage: projectSetting.profileImage,
 			id: projectSetting.id,
 		});
 		setSkills(projectSetting.headingSkills);
+		setSocialLinks(projectSetting.socialMediaLinks);
+		setURL(projectSetting.profileImage);
 	}, [projectSetting]);
 
 	return (
@@ -91,17 +125,6 @@ const ProjectSetting = ({
 						value={item.profileLabel}
 					/>
 				</Grid>
-				<Grid item xs={12} sm={6}>
-					<TextField
-						required
-						id='profileImage'
-						name='profileImage'
-						fullWidth
-						autoComplete='family-name'
-						onChange={handleInputChange}
-						value={item.profileImage}
-					/>
-				</Grid>
 
 				{skills.map((obj, i) => (
 					<Grid item xs={6} key={`${i}`}>
@@ -122,6 +145,70 @@ const ProjectSetting = ({
 						</Fab>
 					</Button>
 				</Grid>
+				{socialLinks.map((obj, i) => (
+					<>
+						<Grid item xs={6}>
+							<TextField
+								required
+								fullWidth
+								name='socialMedia'
+								autoComplete='shipping address-line1'
+								onChange={(e) => handleLinksChange(e, i)}
+								value={obj.socialMedia}
+							/>
+						</Grid>
+						<Grid item xs={6}>
+							<TextField
+								required
+								fullWidth
+								name='icon'
+								autoComplete='shipping address-line1'
+								onChange={(e) => handleLinksChange(e, i)}
+								value={obj.icon}
+							/>
+						</Grid>
+						<Grid item xs={6} key={`${i}`}>
+							<TextField
+								required
+								fullWidth
+								name='link'
+								autoComplete='shipping address-line1'
+								onChange={(e) => handleLinksChange(e, i)}
+								value={obj.link}
+							/>
+						</Grid>
+					</>
+				))}
+				<Grid item xs={12}>
+					<Button onClick={handleAddLink}>
+						<Fab color='primary' aria-label='add' size='small'>
+							<AddIcon />
+						</Fab>
+					</Button>
+				</Grid>
+				<Grid item xs={12} sm={12}>
+					<div style={{ flex: "1" }}>
+						<img src={url} alt='' height='50px' width='100px' />
+					</div>
+					<TextField
+						required
+						id='profileImage'
+						placeholder='profileImage'
+						name='profileImage'
+						type='file'
+						autoComplete='family-name'
+						onChange={handleImageChange}
+						// value={imageAsFile}
+					/>
+					<Button
+						size='small'
+						color='primary'
+						variant='outlined'
+						onClick={handleUpload}>
+						upload
+					</Button>
+				</Grid>
+
 				<Grid item xs={6}>
 					<Button variant='contained' color='primary' onClick={handleSubmit}>
 						Submit
@@ -132,9 +219,9 @@ const ProjectSetting = ({
 	);
 };
 const mapStateToProps = (store) => {
-	console.log("projectSettingReducer", store.projectSettingReducer[0]);
+	console.log("projectSettingReducer", store.projectSettingReducer);
 	return {
-		projectSetting: store.projectSettingReducer[0],
+		projectSetting: store.projectSettingReducer,
 	};
 };
 

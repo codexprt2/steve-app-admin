@@ -19,7 +19,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import AppItems from "../component/Items/AppItems";
 import ProjectSetting from "../component/ProjectSetting/ProjectSetting";
 import Button from "@material-ui/core/Button";
-import fire from "../firebase";
+import { fire } from "../firebase";
 
 function Copyright() {
 	return (
@@ -29,7 +29,6 @@ function Copyright() {
 				Your Website
 			</Link>
 			{new Date().getFullYear()}
-			
 		</Typography>
 	);
 }
@@ -132,11 +131,9 @@ export default function Dashboard() {
 		setToRender(component);
 	};
 	const handleLogout = () => {
-		console.log("button click")
+		console.log("button click");
 		fire.auth().signOut();
-		
 	};
-
 
 	const getRenderComponent = () => {
 		switch (toRender) {

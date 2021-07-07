@@ -1,5 +1,5 @@
 import "./App.css";
-import fire from "./firebase";
+import { fire } from "./firebase";
 import Login from "./component/Login/Login";
 import Hoc from "./Hoc";
 import React, { useState, useEffect } from "react";

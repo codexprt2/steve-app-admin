@@ -6,7 +6,7 @@ const defaultState = {
 	profileImage: "",
 	profileLabel: "",
 	headingSkills: [],
-	socialMediaLink: [],
+	socialMediaLinks: [],
 };
 const projectSettingReducer = (state = defaultState, action) => {
 	switch (action.type) {

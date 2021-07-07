@@ -7,6 +7,8 @@ import { setProjectSetting } from "../redux/projectSetting/action";
 const Hoc = ({ setProjectSettingData }) => {
 	useEffect(() => {
 		setProjectSettingData();
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return <Dashboard />;
 };
