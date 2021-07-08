@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import { storageRef } from "../../firebase";
-
 import { connect } from "react-redux";
 import { updateProjectSettingValue } from "../../redux/projectSetting/action";
 
@@ -101,6 +100,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 						autoComplete='given-name'
 						onChange={handleInputChange}
 						value={item.firstName}
+						variant='outlined'
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -112,6 +112,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 						autoComplete='family-name'
 						onChange={handleInputChange}
 						value={item.lastName}
+						variant='outlined'
 					/>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -123,6 +124,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 						autoComplete='family-name'
 						onChange={handleInputChange}
 						value={item.profileLabel}
+						variant='outlined'
 					/>
 				</Grid>
 
@@ -134,6 +136,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 							autoComplete='shipping address-line1'
 							onChange={(e) => handleSkillsChange(e, i)}
 							value={obj}
+							variant='outlined'
 						/>
 					</Grid>
 				))}
@@ -155,6 +158,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 								autoComplete='shipping address-line1'
 								onChange={(e) => handleLinksChange(e, i)}
 								value={obj.socialMedia}
+								variant='outlined'
 							/>
 						</Grid>
 						<Grid item xs={6}>
@@ -165,6 +169,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 								autoComplete='shipping address-line1'
 								onChange={(e) => handleLinksChange(e, i)}
 								value={obj.icon}
+								variant='outlined'
 							/>
 						</Grid>
 						<Grid item xs={6} key={`${i}`}>
@@ -175,6 +180,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 								autoComplete='shipping address-line1'
 								onChange={(e) => handleLinksChange(e, i)}
 								value={obj.link}
+								variant='outlined'
 							/>
 						</Grid>
 					</>
@@ -199,6 +205,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 						autoComplete='family-name'
 						onChange={handleImageChange}
 						// value={imageAsFile}
+						variant='outlined'
 					/>
 					<Button
 						size='small'

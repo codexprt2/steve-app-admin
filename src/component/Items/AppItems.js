@@ -24,11 +24,11 @@ const AppItems = ({ onHandleSearch }) => {
 				</ListItemIcon>
 				<ListItemText primary='About Me' />
 			</ListItem>
-			<ListItem button onClick={() => onHandleSearch("portfolio")}>
+			<ListItem button onClick={() => onHandleSearch("SkillCategory")}>
 				<ListItemIcon>
 					<PeopleIcon />
 				</ListItemIcon>
-				<ListItemText primary='Portfolio' />
+				<ListItemText primary='SkillCategory' />
 			</ListItem>
 			<ListItem button onClick={() => onHandleSearch("blog")}>
 				<ListItemIcon>

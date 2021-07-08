@@ -3,9 +3,13 @@ import thunk from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import projectSettingReducer from "../redux/projectSetting/reducer";
+import skillCategory from "../redux/skillCategory/reducer";
+import aboutMe from "../redux/aboutMe/reducer";
 
 const reducer = combineReducers({
 	projectSettingReducer,
+	skillCategory,
+	aboutMe,
 });
 
 const persistConfig = {

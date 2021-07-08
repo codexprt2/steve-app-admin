@@ -18,6 +18,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import AppItems from "../component/Items/AppItems";
 import ProjectSetting from "../component/ProjectSetting/ProjectSetting";
+import SkillCategory from "../component/SkillCategory/SkillCategory";
 import AboutMe from "../component/AboutMe/AboutMe";
 import Button from "@material-ui/core/Button";
 import { fire } from "../firebase";
@@ -145,6 +146,9 @@ export default function Dashboard() {
 			case "about": {
 				return <AboutMe />;
 			}
+			case "SkillCategory": {
+				return <SkillCategory />;
+			}
 			default: {
 				return <ProjectSetting />;
 			}
@@ -160,17 +164,18 @@ export default function Dashboard() {
 				position='absolute'
 				className={clsx(classes.appBar, open && classes.appBarShift)}>
 				<Toolbar className={classes.toolbar}>
-					<IconButton
-						edge='start'
-						color='inherit'
-						aria-label='open drawer'
-						onClick={handleDrawerOpen}
-						className={clsx(
-							classes.menuButton,
-							open && classes.menuButtonHidden
-						)}>
-						<MenuIcon />
-					</IconButton>
+					<Button onClick={handleDrawerOpen}>
+						<IconButton
+							edge='start'
+							color='inherit'
+							aria-label='open drawer'
+							className={clsx(
+								classes.menuButton,
+								open && classes.menuButtonHidden
+							)}>
+							<MenuIcon />
+						</IconButton>
+					</Button>
 					<Typography
 						component='h1'
 						variant='h6'
@@ -179,11 +184,9 @@ export default function Dashboard() {
 						className={classes.title}>
 						Dashboard
 					</Typography>
-					<IconButton color='inherit'>
-						<Button color='inherit' onClick={handleLogout}>
-							Logout
-						</Button>
-					</IconButton>
+					<Button color='inherit' onClick={handleLogout}>
+						<IconButton color='inherit'>Logout</IconButton>
+					</Button>
 				</Toolbar>
 			</AppBar>
 			<Drawer
@@ -193,9 +196,11 @@ export default function Dashboard() {
 				}}
 				open={open}>
 				<div className={classes.toolbarIcon}>
-					<IconButton onClick={handleDrawerClose}>
-						<ChevronLeftIcon />
-					</IconButton>
+					<Button onClick={handleDrawerClose}>
+						<IconButton>
+							<ChevronLeftIcon />
+						</IconButton>
+					</Button>
 				</div>
 				<Divider />
 				<List>

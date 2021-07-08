@@ -1,0 +1,3 @@
+export const SET_ABOUTME_LOADER = "SET_ABOUTME_LOADER";
+export const SET_ABOUTME = "SET_ABOUTME";
+export const UPDATE_ABOUTME = "UPDATE_ABOUTME";
