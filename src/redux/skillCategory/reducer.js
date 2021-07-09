@@ -11,7 +11,6 @@ const skillCategory = (state = defaultState, action) => {
 			};
 		}
 		case types.SET_SKILLCATEGORY: {
-			console.log("action.payload!!!!", action.payload);
 			return {
 				...action.payload,
 			};

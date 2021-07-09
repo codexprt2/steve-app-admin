@@ -21,7 +21,6 @@ export const setSkillCategory = () => (dispatch) => {
 	});
 };
 export const updateSkillCategoryValue = (skillCategory) => (dispatch) => {
-	console.log("skillCategory!!!", skillCategory);
 	dispatch(setSkillCategoryLoader(true));
 	skillCategoryFirestore
 		.editSkillCategory(skillCategory)

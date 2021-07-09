@@ -20,3 +20,10 @@ export const setAboutMe = () => (dispatch) => {
 		dispatch(setAboutMeLoader(false));
 	});
 };
+export const updateAboutMeValue = (aboutMe) => (dispatch) => {
+	dispatch(setAboutMeLoader(true));
+	aboutMeFirestore.editAboutMe(aboutMe).then((aboutMeVal) => {
+		dispatch(setAboutMeData(aboutMeVal));
+		dispatch(setAboutMeLoader(false));
+	});
+};

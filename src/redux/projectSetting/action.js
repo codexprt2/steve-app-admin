@@ -38,7 +38,6 @@ export const setProjectSetting = () => (dispatch) => {
 // };
 
 export const updateProjectSettingValue = (projectSetting) => (dispatch) => {
-	console.log("projectSetting!!!", projectSetting);
 	dispatch(setProjectSettingLoader(true));
 	projectSettingFirestore
 		.editProjectSetting(projectSetting)

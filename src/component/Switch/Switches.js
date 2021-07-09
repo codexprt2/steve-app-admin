@@ -1,26 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
-const Switches = () => {
-	const [state, setState] = React.useState({
-		checkedA: true,
-		checkedB: true,
-	});
+const Switches = ({ setIsActive }) => {
+	const [state, setState] = React.useState(false);
 
 	const handleChange = (event) => {
-		setState({ ...state, [event.target.name]: event.target.checked });
+		setState(!state);
 	};
+	useEffect(() => {
+		setIsActive(state);
 
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [state]);
 	return (
 		<FormGroup row>
 			<FormControlLabel
 				control={
 					<Switch
-						checked={state.checkedB}
+						checked={state}
 						onChange={handleChange}
-						name='checkedB'
+						name='isActive'
 						color='primary'
 					/>
 				}

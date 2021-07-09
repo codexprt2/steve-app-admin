@@ -6,7 +6,6 @@ export const getProjectSetting = () => {
 		db()
 			.collection("projectsetting")
 			.onSnapshot((snapshot) => {
-				console.log("snapshot", snapshot);
 				let projectsettingData = {};
 				// eslint-disable-next-line array-callback-return
 				const val = snapshot.docs[0];
@@ -15,7 +14,6 @@ export const getProjectSetting = () => {
 					...val.data(),
 				};
 
-				console.log("projectsettingData : ", projectsettingData);
 				resolve(projectsettingData);
 			});
 	});
@@ -25,13 +23,11 @@ export const addProjectSetting = (projectsetting) => {
 	return new Promise((resolve, reject) => {
 		//  Get add category in firestore
 		let insertData = projectsetting;
-		console.log("insertData", insertData);
-		console.log(insertData);
+
 		db()
 			.collection("projectsetting")
 			.add(insertData)
 			.then(async (docRef) => {
-				console.log(docRef.id);
 				insertData = { id: docRef.id, ...insertData };
 				resolve(insertData);
 			})
@@ -43,7 +39,6 @@ export const addProjectSetting = (projectsetting) => {
 };
 
 export const editProjectSetting = (projectSetting) => {
-	console.log("categoryprojectSetting123", projectSetting);
 	return new Promise(async (resolve, reject) => {
 		//  Get edit category in firestore
 		let updateData = {
@@ -56,14 +51,12 @@ export const editProjectSetting = (projectSetting) => {
 			socialMediaLinks: [...projectSetting.socialMediaLinks],
 		};
 		// let updateData = projectSetting;
-		console.log("updateData", updateData);
 
 		const dbRef = db().collection("projectsetting").doc(projectSetting.id);
 
 		dbRef
 			.update(updateData)
 			.then(async (docRef) => {
-				console.log("docRef", docRef);
 				updateData = { ...projectSetting, ...updateData };
 				resolve(updateData);
 			})

@@ -17,7 +17,6 @@ const projectSettingReducer = (state = defaultState, action) => {
 			};
 		}
 		case types.SET_PROJECTSETTING: {
-			console.log("action.payload!!!!", action.payload);
 			return {
 				...action.payload,
 			};

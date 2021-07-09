@@ -55,7 +55,6 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 		linksData[index][e.target.name] = e.target.value;
 
 		setSocialLinks(linksData);
-		console.log("linksData", linksData);
 	};
 
 	const handleAdd = () => {
@@ -70,7 +69,6 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 		item.profileImage = url;
 
 		updateProjectSettingData(item);
-		console.log("item", item);
 	};
 
 	useEffect(() => {
@@ -150,7 +148,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 				</Grid>
 				{socialLinks.map((obj, i) => (
 					<>
-						<Grid item xs={6}>
+						<Grid item xs={6} key='1'>
 							<TextField
 								required
 								fullWidth
@@ -161,7 +159,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 								variant='outlined'
 							/>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={6} key='2'>
 							<TextField
 								required
 								fullWidth
@@ -172,7 +170,7 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 								variant='outlined'
 							/>
 						</Grid>
-						<Grid item xs={6} key={`${i}`}>
+						<Grid item xs={6} key='3'>
 							<TextField
 								required
 								fullWidth
@@ -226,7 +224,6 @@ const ProjectSetting = ({ projectSetting, updateProjectSettingData }) => {
 	);
 };
 const mapStateToProps = (store) => {
-	console.log("projectSettingReducer", store.projectSettingReducer);
 	return {
 		projectSetting: store.projectSettingReducer,
 	};

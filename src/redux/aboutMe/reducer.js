@@ -2,13 +2,13 @@ import * as types from "./types";
 
 const defaultState = {
 	description: "",
-	personalInfo: [{ label: "name", value: "yogitaba" }],
-	professionalSkills: [],
-	experience: [{ title: "", date: "", des: "", isActive: false }],
-	education: [{ title: "", date: "", des: "" }],
-	services: [{ title: "", icon: "", des: "" }],
+	personalInfo: [{}],
+	professionalSkills: [{}],
+	experience: [{}],
+	education: [{}],
+	services: [{}],
 	testimonials: [{ name: "", position: "", image: "", des: "" }],
-	certificats: [{ title: "", id: "", date: "", link: "" }],
+	certificats: [{ title: "", certificatsId: "", date: "", link: "" }],
 };
 
 const aboutMe = (state = defaultState, action) => {
@@ -20,7 +20,6 @@ const aboutMe = (state = defaultState, action) => {
 			};
 		}
 		case types.SET_ABOUTME: {
-			console.log("action.payload!!!!", action.payload);
 			return {
 				...action.payload,
 			};

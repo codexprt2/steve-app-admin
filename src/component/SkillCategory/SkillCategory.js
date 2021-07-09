@@ -45,7 +45,6 @@ const SkillCategory = ({ skillCategory }) => {
 	);
 };
 const mapStateToProps = (store) => {
-	console.log("store", store.skillCategory);
 	return {
 		skillCategory: store.skillCategory,
 	};
