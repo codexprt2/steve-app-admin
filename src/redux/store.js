@@ -6,12 +6,14 @@ import projectSettingReducer from "../redux/projectSetting/reducer";
 import skillCategory from "../redux/skillCategory/reducer";
 import aboutMe from "../redux/aboutMe/reducer";
 import projectCategory from "../redux/ProjectCategory/reducer";
+import projectDetails from "../redux/ProjectDetails/reducer";
 
 const reducer = combineReducers({
 	projectSettingReducer,
 	skillCategory,
 	aboutMe,
 	projectCategory,
+	projectDetails,
 });
 
 const persistConfig = {
