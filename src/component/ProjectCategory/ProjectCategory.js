@@ -5,36 +5,36 @@ import TextField from "@material-ui/core/TextField";
 import AddButton from "../Button/AddButton";
 import { connect } from "react-redux";
 
-const SkillCategory = ({ skillCategory }) => {
-	const [skills, setSkills] = useState([]);
+const ProjectCategory = ({ projectCategory }) => {
+	const [projectCategories, setProjectCategories] = useState([]);
 
-	const handleSkillsChange = (e, index) => {
-		const skillsData = [...skills];
-		skillsData[index] = e.target.value;
-		setSkills(skillsData);
+	const handleCategoryChange = (e, index) => {
+		const categoryData = [...projectCategories];
+		categoryData[index] = e.target.value;
+		setProjectCategories(categoryData);
 	};
 	const handleAdd = () => {
-		setSkills([...skills, ""]);
+		setProjectCategories([...projectCategories, ""]);
 	};
 
 	useEffect(() => {
-		setSkills(skillCategory.category);
+		setProjectCategories(projectCategory.category);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
 		<React.Fragment>
 			<Typography variant='h6' gutterBottom>
-				Skill Category
+				Project Category
 			</Typography>
 			<Grid container spacing={3}>
-				{skills.map((obj, i) => (
+				{projectCategories.map((obj, i) => (
 					<Grid item xs={12} key={`${i}`}>
 						<TextField
 							required
 							variant='outlined'
 							autoComplete='shipping address-line1'
-							onChange={(e) => handleSkillsChange(e, i)}
+							onChange={(e) => handleCategoryChange(e, i)}
 							value={obj}
 						/>
 					</Grid>
@@ -45,8 +45,9 @@ const SkillCategory = ({ skillCategory }) => {
 	);
 };
 const mapStateToProps = (store) => {
+	console.log("store", store.projectCategory);
 	return {
-		skillCategory: store.skillCategory,
+		projectCategory: store.projectCategory,
 	};
 };
-export default connect(mapStateToProps, null)(SkillCategory);
+export default connect(mapStateToProps, null)(ProjectCategory);

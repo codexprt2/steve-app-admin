@@ -21,6 +21,7 @@ import ProjectSetting from "../component/ProjectSetting/ProjectSetting";
 import SkillCategory from "../component/SkillCategory/SkillCategory";
 import AboutMe from "../component/AboutMe/AboutMe";
 import PortFolio from "../component/Portfolio/PortFolio";
+import ProjectCategory from "../component/ProjectCategory/ProjectCategory";
 import Button from "@material-ui/core/Button";
 import { fire } from "../firebase";
 
@@ -150,8 +151,11 @@ export default function Dashboard() {
 			case "SkillCategory": {
 				return <SkillCategory />;
 			}
-			case "portfolio ": {
+			case "PortFolio": {
 				return <PortFolio />;
+			}
+			case "ProjectCategory": {
+				return <ProjectCategory />;
 			}
 			default: {
 				return <ProjectSetting />;

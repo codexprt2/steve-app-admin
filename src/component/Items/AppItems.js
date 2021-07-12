@@ -28,19 +28,19 @@ const AppItems = ({ onHandleSearch }) => {
 				<ListItemIcon>
 					<PeopleIcon />
 				</ListItemIcon>
-				<ListItemText primary='SkillCategory' />
+				<ListItemText primary='Skill Category' />
 			</ListItem>
-			<ListItem button onClick={() => onHandleSearch("portfolio")}>
+			<ListItem button onClick={() => onHandleSearch("PortFolio")}>
 				<ListItemIcon>
 					<BarChartIcon />
 				</ListItemIcon>
 				<ListItemText primary='PortFolio' />
 			</ListItem>
-			<ListItem button onClick={() => onHandleSearch("contact")}>
+			<ListItem button onClick={() => onHandleSearch("ProjectCategory")}>
 				<ListItemIcon>
 					<LayersIcon />
 				</ListItemIcon>
-				<ListItemText primary='Contact' />
+				<ListItemText primary='Project Category' />
 			</ListItem>
 		</div>
 	);
